@@ -1,0 +1,17 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Données locales
+data/raw/*
+!data/raw/.gitkeep
+
+# Logs et fichiers temporaires
+*.log
+*.tmp

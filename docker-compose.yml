@@ -1,0 +1,15 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:latest
+    container_name: oracle-data-platform
+    ports:
+      - "1522:1521"
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./oracle/init:/container-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+  oracle_data:

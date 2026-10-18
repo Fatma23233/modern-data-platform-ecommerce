@@ -1,0 +1,528 @@
+{
+  "generated_at": "2026-10-08T23:22:18",
+  "raw_directory": "C:\\Users\\user\\Documents\\Modern Data Platform E-commerce\\data\\raw",
+  "datasets": {
+    "customers": {
+      "file": "olist_customers_dataset.csv",
+      "rows": 99441,
+      "columns": [
+        "customer_id",
+        "customer_unique_id",
+        "customer_zip_code_prefix",
+        "customer_city",
+        "customer_state"
+      ]
+    },
+    "geolocation": {
+      "file": "olist_geolocation_dataset.csv",
+      "rows": 1000163,
+      "columns": [
+        "geolocation_zip_code_prefix",
+        "geolocation_lat",
+        "geolocation_lng",
+        "geolocation_city",
+        "geolocation_state"
+      ]
+    },
+    "order_items": {
+      "file": "olist_order_items_dataset.csv",
+      "rows": 112650,
+      "columns": [
+        "order_id",
+        "order_item_id",
+        "product_id",
+        "seller_id",
+        "shipping_limit_date",
+        "price",
+        "freight_value"
+      ]
+    },
+    "payments": {
+      "file": "olist_order_payments_dataset.csv",
+      "rows": 103886,
+      "columns": [
+        "order_id",
+        "payment_sequential",
+        "payment_type",
+        "payment_installments",
+        "payment_value"
+      ]
+    },
+    "reviews": {
+      "file": "olist_order_reviews_dataset.csv",
+      "rows": 99224,
+      "columns": [
+        "review_id",
+        "order_id",
+        "review_score",
+        "review_comment_title",
+        "review_comment_message",
+        "review_creation_date",
+        "review_answer_timestamp"
+      ]
+    },
+    "orders": {
+      "file": "olist_orders_dataset.csv",
+      "rows": 99441,
+      "columns": [
+        "order_id",
+        "customer_id",
+        "order_status",
+        "order_purchase_timestamp",
+        "order_approved_at",
+        "order_delivered_carrier_date",
+        "order_delivered_customer_date",
+        "order_estimated_delivery_date"
+      ]
+    },
+    "products": {
+      "file": "olist_products_dataset.csv",
+      "rows": 32951,
+      "columns": [
+        "product_id",
+        "product_category_name",
+        "product_name_lenght",
+        "product_description_lenght",
+        "product_photos_qty",
+        "product_weight_g",
+        "product_length_cm",
+        "product_height_cm",
+        "product_width_cm"
+      ]
+    },
+    "sellers": {
+      "file": "olist_sellers_dataset.csv",
+      "rows": 3095,
+      "columns": [
+        "seller_id",
+        "seller_zip_code_prefix",
+        "seller_city",
+        "seller_state"
+      ]
+    },
+    "translations": {
+      "file": "product_category_name_translation.csv",
+      "rows": 71,
+      "columns": [
+        "product_category_name",
+        "product_category_name_english"
+      ]
+    }
+  },
+  "key_checks": [
+    {
+      "key": "customers.customer_id",
+      "columns": [
+        "customer_id"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "orders.order_id",
+      "columns": [
+        "order_id"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "products.product_id",
+      "columns": [
+        "product_id"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "sellers.seller_id",
+      "columns": [
+        "seller_id"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "translations.product_category_name",
+      "columns": [
+        "product_category_name"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "order_items(order_id, order_item_id)",
+      "columns": [
+        "order_id",
+        "order_item_id"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "payments(order_id, payment_sequential)",
+      "columns": [
+        "order_id",
+        "payment_sequential"
+      ],
+      "expected_unique": true,
+      "null_rows": 0,
+      "duplicate_rows": 0,
+      "duplicate_groups": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "reviews.review_id",
+      "columns": [
+        "review_id"
+      ],
+      "expected_unique": false,
+      "null_rows": 0,
+      "duplicate_rows": 1603,
+      "duplicate_groups": 789,
+      "status": "WARNING"
+    }
+  ],
+  "relationship_checks": [
+    {
+      "relation": "orders.customer_id -> customers.customer_id",
+      "child_dataset": "orders",
+      "parent_dataset": "customers",
+      "child_key": "customer_id",
+      "parent_key": "customer_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    },
+    {
+      "relation": "order_items.order_id -> orders.order_id",
+      "child_dataset": "order_items",
+      "parent_dataset": "orders",
+      "child_key": "order_id",
+      "parent_key": "order_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    },
+    {
+      "relation": "order_items.product_id -> products.product_id",
+      "child_dataset": "order_items",
+      "parent_dataset": "products",
+      "child_key": "product_id",
+      "parent_key": "product_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    },
+    {
+      "relation": "order_items.seller_id -> sellers.seller_id",
+      "child_dataset": "order_items",
+      "parent_dataset": "sellers",
+      "child_key": "seller_id",
+      "parent_key": "seller_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    },
+    {
+      "relation": "payments.order_id -> orders.order_id",
+      "child_dataset": "payments",
+      "parent_dataset": "orders",
+      "child_key": "order_id",
+      "parent_key": "order_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    },
+    {
+      "relation": "reviews.order_id -> orders.order_id",
+      "child_dataset": "reviews",
+      "parent_dataset": "orders",
+      "child_key": "order_id",
+      "parent_key": "order_id",
+      "orphan_keys_count": 0,
+      "sample_orphan_keys": [],
+      "status": "PASS"
+    }
+  ],
+  "order_coverage_checks": [
+    {
+      "check": "Commandes sans article",
+      "count": 775,
+      "sample_order_ids": [
+        "8e24261a7e58791d10cb1bf9da94df5c",
+        "c272bcd21c287498b4883c7512019702",
+        "37553832a3a89c9b2db59701c357ca67",
+        "d57e15fb07fd180f06ab3926b39edcd2",
+        "00b1cb0320190ca0daa2c88b35206009",
+        "2f634e2cebf8c0283e7ef0989f77d217",
+        "ee0db22a8e742b752914016708470ec8",
+        "ed3efbd3a87bea76c2812c66a0b32219",
+        "6ad57aecbae806a7e9cc2cdb6b380711",
+        "df8282afe61008dc26c6c31011474d02"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "Commandes sans paiement",
+      "count": 1,
+      "sample_order_ids": [
+        "bfbd0f9bdef84302105ad712db648a6c"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "Commandes sans avis",
+      "count": 768,
+      "sample_order_ids": [
+        "403b97836b0c04a622354cf531062e5f",
+        "6942b8da583c2f9957e990d028607019",
+        "4906eeadde5f70b308c20c4a8f20be02",
+        "b7a4a9ecb1cd3ef6a3e36a48e200e3be",
+        "59b32faedc12322c672e95ec3716d614",
+        "c2215076050fa358934105b15c34cf3b",
+        "eafef0e6c44f121531569a69a318c3b3",
+        "95d9d2979d40161be87292ff88563cba",
+        "a9b151f0c0471d9b2534fa73c9c0e123",
+        "5e8d0f2f1e06e715aee3eefe4c175e52"
+      ],
+      "status": "WARNING"
+    }
+  ],
+  "reference_coverage_checks": [
+    {
+      "check": "product_categories_without_translation",
+      "count": 2,
+      "sample_values": [
+        "pc_gamer",
+        "portateis_cozinha_e_preparadores_de_alimentos"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "customer_zip_without_geolocation",
+      "count": 157,
+      "sample_values": [
+        "72300",
+        "11547",
+        "64605",
+        "72465",
+        "7729",
+        "72904",
+        "35408",
+        "78554",
+        "73369",
+        "8980"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "seller_zip_without_geolocation",
+      "count": 7,
+      "sample_values": [
+        "82040",
+        "91901",
+        "72580",
+        "2285",
+        "7412",
+        "71551",
+        "37708"
+      ],
+      "status": "WARNING"
+    }
+  ],
+  "business_rule_checks": [
+    {
+      "check": "Articles avec prix NULL, nul ou négatif",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Articles avec fret NULL ou négatif",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Paiements avec montant NULL ou négatif",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Paiements avec nombre de mensualités NULL ou négatif",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Avis avec score hors intervalle 1 à 5",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Produits avec product_weight_g <= 0",
+      "count": 4,
+      "critical": false,
+      "sample_values": [
+        "81781c0fed9fe1ad6e8c81fca1e1cb08",
+        "8038040ee2a71048d4bdbbdc985b69ab",
+        "36ba42dd187055e1fbe943b2d11430ca",
+        "e673e90efa65a5409ff4196c038bb5af"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "Produits avec product_length_cm <= 0",
+      "count": 0,
+      "critical": false,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Produits avec product_height_cm <= 0",
+      "count": 0,
+      "critical": false,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Produits avec product_width_cm <= 0",
+      "count": 0,
+      "critical": false,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Commandes approuvées avant leur achat",
+      "count": 0,
+      "critical": true,
+      "sample_values": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Commandes remises au transporteur avant approbation",
+      "count": 1359,
+      "critical": false,
+      "sample_values": [
+        "dcb36b511fcac050b97cd5c05de84dc3",
+        "688052146432ef8253587b930b01a06d",
+        "58d4c4747ee059eeeb865b349b41f53a",
+        "412fccb2b44a99b36714bca3fef8ad7b",
+        "56a4ac10a4a8f2ba7693523bb439eede",
+        "32e4fa9bb468884309b58b9348de70c3",
+        "4df92d82d79c3b52c7138679fa9b07fc",
+        "16e38caa92e342c7780f68832f832d4d",
+        "b9afddbdcfadc9a87b41a83271c3e888",
+        "6051e6d3da9a50b7325cbe9c81025062"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "Commandes livrées avant remise au transporteur",
+      "count": 23,
+      "critical": true,
+      "sample_values": [
+        "a1abeb653a4d4cd1e142ccb8c82cd069",
+        "383aa8b2724fe452d9ccd9934a8c628b",
+        "cb1134f9010d242e9515ad1c78ec0c39",
+        "dceb62e8fa94b46006c9554fed743df0",
+        "5f9d46795c3126674e52becb3a1a517f",
+        "8c78d01de3a9009e23d6877a7cc9be20",
+        "b27af682321527a6349f1761eb3f360c",
+        "1cc3ae63caffff2d6c3ee3e78e074acf",
+        "e37f11cae9985ca58f0b56f268720537",
+        "fa3e37584f4fdb1ded0e0de700dfcb4e"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "check": "Commandes delivered sans date de livraison client",
+      "count": 8,
+      "critical": true,
+      "sample_values": [
+        "2d1e2d5bf4dc7227b3bfebb81328c15f",
+        "f5dd62b788049ad9fc0526e3ad11a097",
+        "2ebdfc4f15f23b91474edf87475f108e",
+        "e69f75a717d64fc5ecdfae42b2e8e086",
+        "0d3268bad9b086af767785e3f0fc0133",
+        "2d858f451373b04fb5c984a1cc2defaf",
+        "ab7c89dc1bf4a1ead9d6ec1ec8968a84",
+        "20edc82cf5400ce95e1afacc25798b31"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "check": "Articles avec shipping_limit_date à partir de 2019",
+      "count": 4,
+      "critical": false,
+      "sample_values": [
+        "13bdf405f961a6deec817d817f5c6624",
+        "9c94a4ea2f7876660fa6f1b59b69c8e6",
+        "c2bb89b5c1dd978d507284be78a04cb2"
+      ],
+      "status": "WARNING"
+    }
+  ],
+  "review_checks": [
+    {
+      "check": "repeated_review_ids",
+      "count": 789,
+      "sample_values": [
+        "28642ce6250b94cc72bc85960aec6c62",
+        "a0a641414ff718ca079b3967ef5c2495",
+        "f4d74b17cd63ee35efa82cd2567de911",
+        "ecbaf1fce7d2c09bfab46f89065afeaf",
+        "6b1de94de0f4bd84dfc4136818242faa",
+        "957011305e7a4b6c8a266eeeb8e0316d",
+        "b34f4a786bf00b7c8486141ba482783b",
+        "d433c252647c51309432ca0b763f969b",
+        "5f35bbde2b32b8617aab15b7a9a0ae24",
+        "c5976a5a98e854fb23d7e03c6754ae60"
+      ],
+      "status": "WARNING"
+    },
+    {
+      "check": "orders_with_multiple_reviews",
+      "count": 547,
+      "sample_values": [
+        "cf73e2cb1f4a9480ed70c154da3d954a",
+        "169d7e0fd71d624d306f132acd791cbe",
+        "1c308eca3f339414a92e518e2a2e5ee9",
+        "2002ea16e75277eaa0b5d78632048540",
+        "1d297b4800ed1a3c5b0944d84c01ee99",
+        "0176a6846bcb3b0d3aa3116a9a768597",
+        "b6e5aa946acc4e29e7069510f28a0bce",
+        "5040757d4e06a4be96d3827b860b4e7c",
+        "80446aee36e09ebf4cb79585f6c9ce61",
+        "45390ff93f092f0de1524d486a172c33"
+      ],
+      "status": "WARNING"
+    }
+  ]
+}
