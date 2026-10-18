@@ -1,5 +1,8 @@
 # Modern Data Platform E-commerce
 
+<img width="833" height="478" alt="image" src="https://github.com/user-attachments/assets/22ff119c-0557-4b4c-82e0-3b97a0a196e5" />
+
+
 Plateforme de données e-commerce de bout en bout construite avec **Oracle Database, Python, SQL, Docker et Power BI**.
 
 Le projet couvre toute la chaîne de traitement : ingestion des données, architecture Bronze/Silver/Gold, contrôles qualité, modèle analytique et dashboards Power BI interactifs.
